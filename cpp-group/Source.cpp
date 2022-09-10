@@ -10,6 +10,7 @@ using namespace std;
 int main()
 {
     int size_of_menu = 6;
+    //comment
     int choice;
     string menu_options[6] = {
         "To Buy Ticket",
