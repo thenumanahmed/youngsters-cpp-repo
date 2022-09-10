@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef SELECTINGMENU_H
+#define SELECTINGMENU_H
+
 #include<iostream>
 #include<string>
 #include<conio.h>
@@ -142,3 +145,6 @@ void SelectingMenu::displayArrowStart()
 {
     cout << "| => ";
 }
+
+
+#endif
