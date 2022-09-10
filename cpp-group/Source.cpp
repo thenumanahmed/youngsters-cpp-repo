@@ -9,23 +9,25 @@ using namespace std;
 
 int main()
 {
-    int size_of_menu = 6;
     //comment
     int choice;
-    string menu_options[6] = {
+    const int size_of_menu = 9;
+    string menu_options[size_of_menu] = {
         "To Buy Ticket",
         "Total Sales",
         "Total Seats Sold",
         "Total Seats Avaliable",
         "Total Seats in selected Row",
+        "Total Seats in selected Row",
+        "Total Seats in selected Row",
+        "Total Seats in selected Row",
         "Quit"
     };
 
-    SelectingMenu  homeMenu(menu_options, size_of_menu);
-
+    SelectingMenu  homeMenu(menu_options, size_of_menu );
     choice = homeMenu.menu();
 
-    cout << " You Have Selected " << choice << endl;
+    homeMenu.message_maker(" You Have Selected " + to_string(choice));
     return 0;
 }
 

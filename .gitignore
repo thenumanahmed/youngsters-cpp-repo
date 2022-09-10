@@ -7,6 +7,8 @@
 cpp-group.sln
 cpp-group/cpp-group.vcxproj
 cpp-group/cpp-group.vcxproj.filters
+Source.exe
+.vscode/settings.json
 
 # User-specific files
 *.rsuser

@@ -6,6 +6,7 @@
 #include<iostream>
 #include<string>
 #include<conio.h>
+#include<iomanip>
 using namespace std;
 
 
@@ -17,7 +18,8 @@ private:
     void menu_builder();
     void move_line_up(int);
     void move_line_down(int);
-    void displayArrowStart();
+    void displayArrow();
+    void line_break();
 
 
 public:
@@ -42,86 +44,89 @@ public:
         else col_size = max + 5;
     }
     int menu();
+    void message_maker(string message);
 };
 
+
 int SelectingMenu::menu() {
-    const int position = 12;
+    const int position = no_of_options + 4 ;
     int count = 1;
     char value;
-    //cout << "+----------------------------------------+" << endl;
-    //cout << "| 1: To Buy Ticket                       |" << endl;
-    //cout << "| 2: Total Sales                         |" << endl;
-    //cout << "| 3: Total Seats Sold                    |" << endl;
-    //cout << "| 4: Total Seats Avaliable               |" << endl;
-    //cout << "| 5: Total Seats in selected Row         |" << endl;
-    //cout << "| 6: Quit                                |" << endl;
-    //cout << "+----------------------------------------+" << endl;
-    //cout << "| Please W,S for UP,Down moving Cursor | |" << endl;
-    //cout << "| Please ( F ) to Select                 |" << endl;
-    //cout << "+----------------------------------------+" << endl;
 
-    // first line 
-    cout << "+";
-    for (int i = 0; i < col_size + 4; i++) {
-        cout << "-";
-    }
-    cout << "+" << endl;
 
-    // Loop for mid things 
+    /////////////////////////////////////////////////////
+    //  Message Body : Will Display Options            //
+    /////////////////////////////////////////////////////
+    line_break();
+    message_maker("(W S) or Arow-Keys for Up and Down");
+    message_maker("F or Enter for Selecting Option");
+    line_break();
     for (int i = 0; i < no_of_options; i++) {
-        // message_builder (index,menu_option[index]); 
+        message_maker( to_string(i+1) + ": " + menu_options[i] );
     }
-    // loop for third line
-    cout << "+";
-    for (int i = 0; i < col_size + 4; i++) {
-        cout << "-";
-    }
-    cout << "+" << endl;
+    line_break();
+    message_maker("Choice =>");
+    line_break();
 
 
-    cout << "| Choice =>                              |" << endl;
-    // to set the cursor just right next to => of choice
-    move_line_up(position - count);
-    displayArrowStart();
-    move_line_down(position - count - 1);
-    cout << "| Choice =>" << count;
-    move_line_down(1);
 
+    /////////////////////////////////////////////////////
+    // Choice Body 
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    //  1 - Displaying Initial Arrow + Choice Value
+    /////////////////////////////////////////////////////
+        move_line_up(position - count);
+        displayArrow();
+        move_line_down(position - count - 2); 
+        message_maker("Choice =>" + to_string(count));
+
+    /////////////////////////////////////////////////////
+    //  2- Loop to take user Input and perform following actions 
+    //      a) Skip in case of junk value stored
+    //      b) Return slected option value if Enter or F pressed
+    //      c) if s/down pressed & not last option 
+    //         then retore above value of option index ( 1: ) 
+    //         and display arrow below it  
+    //      d) if w/up pressed & not first option 
+    //         then retore bellow value of option index ( 2: ) 
+    //         and display arrow above it  
+    //      e) skip if random key is pressed
+    /////////////////////////////////////////////////////
     while (true) {
         value = _getch();
         if (int(value) == -32) {
             continue;
         }
-        else if (value == 's' || value == 'S' || int(value) == 80) {
-            if (count >= 6) {
-                continue;
-            }
-            count++;
-            move_line_up(position - count + 1);
-            cout << "| " << count - 1 << ": ";
-            move_line_down(1);
-        }
-        else if (value == 'w' || value == 'W' || int(value) == 72) {
-            if (count <= 1) {
-                continue;
-            }
-            count--;
-            move_line_up(position - count - 1);
-            cout << "| " << count + 1 << ": ";
-            move_line_up(1);
-        }
         else if (value == 'f' || value == 'F' || value == 13) {
-            /* cout << "selected" << count << endl;
-             break;*/
+             move_line_down(1);
             return count;
+        }
+        else if (value == 's' || value == 'S' || int(value) == 80 && count!=no_of_options) {
+
+            count++;
+            move_line_up(position - count );
+            cout << "| " << count - 1 << ": ";
+
+            move_line_down(1);
+            displayArrow();
+            move_line_down(position - count -2 );
+            message_maker("Choice =>" + to_string(count));
+        }
+        else if (value == 'w' || value == 'W' || int(value) == 72 && count!= 1) {
+
+            count--;
+            move_line_up(position - count - 2);
+            cout << "| " << count + 1 << ": ";
+            
+            move_line_up(1);
+            displayArrow();
+            move_line_down(position - count -2 );
+            message_maker("Choice =>" + to_string(count));
         }
         else {
             continue;
-        }
-        displayArrowStart();
-        move_line_down(position - count - 1);
-        cout << "| Choice =>" << count;
-        move_line_down(1);
+        }   
     }
 }
 
@@ -141,10 +146,23 @@ void SelectingMenu::move_line_down(int value)
         cout << "\n";
     }
 }
-void SelectingMenu::displayArrowStart()
+void SelectingMenu::displayArrow()
 {
     cout << "| => ";
 }
 
+void SelectingMenu::line_break(){
+cout << "+";
+    for (int i = 0; i < col_size + 2; i++) {
+        cout << "-";
+    }
+    cout << "+" << endl;
+}
 
+
+void SelectingMenu::message_maker(string message){
+    cout<<"| "
+        <<setw(col_size)<<left<<message
+        <<" |"<<endl;
+}
 #endif
