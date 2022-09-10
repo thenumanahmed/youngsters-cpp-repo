@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+## Salman Added this to work with vs code
+cpp-group.sln
+cpp-group/cpp-group.vcxproj
+cpp-group/cpp-group.vcxproj.filters
+
 # User-specific files
 *.rsuser
 *.suo
