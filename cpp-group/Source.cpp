@@ -12,12 +12,12 @@ int main()
     int size_of_menu = 6;
     int choice;
     string menu_options[6] = {
-        "To Buy Ticket",
-        "Total Sales",
-        "Total Seats Sold",
-        "Total Seats Avaliable",
-        "Total Seats in selected Row",
-        "Quit"
+        "To Buy Ticket.",
+        "Total Sales.",
+        "Total Seats Sold.",
+        "Total Seats Avaliable.",
+        "Total Seats in selected Row.",
+        "Quit."
     };
 
     SelectingMenu  homeMenu(menu_options, size_of_menu);
