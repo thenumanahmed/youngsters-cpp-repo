@@ -68,9 +68,10 @@ int SelectingMenu::menu() {
     cout << "+" << endl;
 
     // Loop for mid things 
-    for (int i = 0; i < no_of_options; i++) {
-        // message_builder (index,menu_option[index]); 
-    }
+    // for (int i = 0; i < no_of_options; i++) {
+    //     // message_builder (index,menu_option[index]); 
+    // }
+    
     // loop for third line
     cout << "+";
     for (int i = 0; i < col_size + 4; i++) {
